@@ -1,0 +1,53 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#login {
+    width: 90%;
+    text-align: center;
+}
+
+#signup {
+    width: 90%;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    color: black;
+}
+
+.logininfo {
+    width: 100px;
+    text-align: center; 
+}
+
+.Signup {
+    display: inline-block;
+    width: 140px;     
+    text-align: left;  
+    margin-right: 10px;
+}
+
+#signupBtn {
+    width: 100px;
+    text-align: center; 
+}
+
+.menuRibbon {
+    background-color: #333;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
+
+
+
