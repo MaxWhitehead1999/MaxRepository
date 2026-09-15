@@ -1,24 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
+
+<!--TODO: 1: user creates account using register page, should be able to login with email and password!-->
+<!--  - test with Max@well.com for Email and P@ss1564 -->
+
+<!--TODO: 1.1: User Leaves empty email field, should display error message -->
+<!--  - test with P@ss1564 as password but leave email blank, should display error message -->
+
+<!--TODO: 1.1.1: used in signup page, error displays if password does not meet requirements -->
+<!--  - test with Pass1, should display error message -->
+
 <head>
   <title>Password Reset</title>
   <link rel="stylesheet" href="style.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
 
-  <div id = "login">
+  <div id="login" class="LoginInputContainer">
     <h1>Library Login</h1>
 
-      <button class="logininfo" onclick="goToMain()">Login</button>
+    <div class="logininfo">
+      <button onclick="goToMain()">Login</button>
       <input type="password" id="password" placeholder="password"><br><br>
-     
-      <button class="logininfo" onclick="goToSignup()">Signup</button>
+    </div>
+    <div class="logininfo">
+      <button onclick="goToSignup()">Signup</button>
       <input type="email" id="email" placeholder="Email"><br><br>
-      
+    </div>
+
+    <div class="hyperlink">
       <a href="forgotpass.html">Forgot Password?</a>
+    </div>
   </div>
 
   <script src="script.js"></script>
 </body>
+
 </html>
