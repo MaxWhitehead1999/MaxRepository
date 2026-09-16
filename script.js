@@ -6,26 +6,80 @@ function goToSignup() {
 }
 
 /** Pass and username requirements */
-const storedEmail = "test@email.com";
-const storedPassword = "password123";
+
 const maxAttempts = 5;
-const lockoutDuration = 30 * 60 * 1000; 
+const lockoutDuration = 30 * 60 * 1000;
 
-
+let accounts = [["max", "whi", "password123", "29AvenueStreet", "test@email.com"],
+            ["andrew", "smith", "password456","456OakAvenue", "andrew@email.com"]]; // Example existing accounts
 
 
 /**fix later so that after 5 attempts the error page is displayed then have it be on for 30 minutes */
 function goToMain() {
 
-    if (
-        document.getElementById("email").value === storedEmail &&
-        document.getElementById("password").value === storedPassword
-    ) {
-        window.location.href = "main.html";
+    emailInput = document.getElementById("email").value;
+    passwordInput = document.getElementById("password").value;
+
+
+    for (let i = 0; i < accounts.length; i++) {
+      
+        if (emailInput == accounts[i][4] && passwordInput == accounts[i][2]){
+            window.location.href = "main.html";
+            break;
+        } else {
+            window.location.href = "error.html";
+            break;
+        }
+        
+    }
+
+}
+
+
+
+function addNewAccount() {
+
+    if (!loginValidation(document.getElementById("password").value)) {
+        return; // Stop execution if password is invalid
     } else {
-        window.location.href = "error.html";
+
+        let newAccount = {
+            firstName: document.getElementById("firstName").value,
+            lastName: document.getElementById("lastName").value,
+            password: document.getElementById("password").value,
+            address: document.getElementById("address").value,
+            email: document.getElementById("email").value
+        }
+
+        accounts.push([
+            newAccount.firstName,
+            newAccount.lastName,
+            newAccount.password,
+            newAccount.address,
+            newAccount.email
+        ]);
+
+        window.location.href = "login.html";
     }
 }
+
+
+function loginValidation(password) {
+    if (password.length < 8) {
+        alert("Password must be at least 8 characters long.");
+        return false;
+    } else if (!/[A-Z]/.test(password)) {
+        alert("Password must contain at least one uppercase letter.");
+        return false;
+    } else if (!/[a-z]/.test(password)) {
+        alert("Password must contain at least one lowercase letter.");
+        return false;
+    } else if (!/[0-9]/.test(password)) {
+        alert("Password must contain at least one number.");
+        return false;
+    }
+}
+
 
 
 
@@ -39,7 +93,7 @@ function logout() {
     window.location.href = "login.html";
 }
 
-function closeErrorAlert(){
+function closeErrorAlert() {
     document.getElementById("errorAlert").style.display = "none";
 }
 
