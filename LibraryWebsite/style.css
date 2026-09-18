@@ -1,0 +1,257 @@
+/* General Styles */
+
+body {
+    margin: 0;
+    height: 100vh;
+}
+
+
+#signup {
+    width: 90%;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    color: black;
+}
+
+/* Login Page Styles **/
+
+.LoginInputContainer{
+    width: 50%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 5%;
+    padding: 20px;
+    border: 2px solid black;
+}
+
+
+.logininfo {
+    text-align: center;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px; 
+}
+
+.logininfo input {
+    width: 200px;
+    
+}
+.logininfo button {
+    width: 100px;
+    text-align: center; 
+}
+
+.hyperlink {
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+
+
+
+
+/** Signup Page Styles **/
+.btnSignupContainer{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+
+.signupBtn {
+    width: 100px;
+    text-align: center; 
+}
+
+
+/** Main Page Styles**/
+.welcome {
+    margin-bottom: 20px;
+    text-align: center;
+    color: black;
+}
+
+
+.mainContain{
+    width: 60%;
+    margin-left:auto;
+    margin-right:auto;
+    padding: 20px;
+    border: 2px solid black;
+}
+
+.checkout, .overdue {
+    width: 50%;
+    border: 2px solid black;
+    margin-bottom: 20px;
+}
+
+
+.checkout td, .overdue td {
+    padding: 10px;
+    text-align: left;
+}
+
+
+
+/** Profile Page Styles **/
+
+.profileContain{
+    width: 60%;
+    margin-left:auto;
+    margin-right:auto;
+    display: flex;
+    padding: 20px;
+    border: 2px solid black;
+}
+
+
+.profiledetails {
+    width: 50%;
+    margin-left: auto;
+    border: 2px solid black;
+   
+}
+
+.profiledetails td {
+    
+    padding: 10px;
+    text-align: left;
+    
+}
+
+/** Error Page Styles **/
+.errorContain{
+    width: 60%;
+    margin-left:auto;
+    margin-right:auto;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    
+}
+
+.errorimg {
+    width: 45%;
+    height: 45%;
+    margin-bottom: 20px;
+}
+
+.errormsg {
+    width: 100%;
+    text-align: center;
+    font-size:200%;
+}
+
+
+
+/** Navigation Menu Ribbon Styles**/
+.menuRibbon {
+    width: 100%;
+    height: 50px;
+    background-color: #333;
+    top: 0;
+}
+
+.menuRibbon ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.menuRibbon li {
+    flex: 1;
+}
+
+.menuRibbon a {
+    display: block;
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    padding: 15px 20px;
+    text-align: center;
+}
+
+/** Add New Book Page Styles **/
+
+.inputContainer{
+    width: 50%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 5%;
+    padding: 20px;
+    border: 2px solid black;
+}
+
+.defaultInput{
+    align-items: center;
+    width: 100%;
+}
+
+.save{
+    width: 100px;
+    text-align: center; 
+}
+
+.cancel{
+    width: 100px;
+    text-align: center; 
+}
+
+.btnContainer{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+
+
+
+/** Alert Page Sytles **/
+.errorAlert{
+    padding: 15px;
+    margin: auto;
+    width: 80%;
+
+    background-color: #cef605;
+    border: 2px solid black;
+    border-radius: 20px;
+    
+    position: relative;
+    text-align: center;
+    
+}
+
+.erroralertmsg{
+    margin: 0;
+    text-align: center;
+    margin-right: 25px;
+}
+
+.closeAlert{
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+
+    background-color: #cef605;
+    border:none;
+    padding-left: 10px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.closeAlert:hover {
+    color: red;
+}
+
+
+
+
+

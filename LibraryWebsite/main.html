@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- use Shift + alt + f for proper indenting-->
+
+<head>
+  <title>Main page</title>
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+  <nav class="menuRibbon">
+    <ul>
+      <li><a href="main.html">Home</a></li>
+      <li><a href="search.html">SearchBook</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="login.html">Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- username is to be replaced with actual username from javascript -->
+  <h1 class="welcome">Welcome [username]</h1>
+
+
+  <!--- book titles is to be replaced with actual book title from javascript and is going
+  to hold multiple books at once for both checkout and overdue-->
+
+  <div class="mainContain">
+    <table class="checkout">
+      <tr>
+        <td>Books currently Checked out:</td>
+      </tr>
+      <tr>
+        <td>book title</td>
+      </tr>
+    </table>
+
+    <table class="overdue">
+      <tr>
+        <td>Overdue Books:</td>
+      </tr>
+      <tr>
+        <td>book title</td>
+      </tr>
+    </table>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
