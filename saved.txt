@@ -3,3 +3,5 @@ example of stored password/username thats already stored within the system:
 username: Max@well.com
 
 password: P@ss1564
+
+Website: http://localhost/CapstoneProject/login.html
