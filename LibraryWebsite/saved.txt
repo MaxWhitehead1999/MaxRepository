@@ -3,3 +3,15 @@ example of stored password/username thats already stored within the system:
 username: Max@well.com
 
 password: P@ss1564
+
+Website: http://localhost/CapstoneProject/login.html
+
+phpmyadmin: http://localhost/phpmyadmin/index.php?route=/sql&pos=0&db=mylibrary&table=accounts
+
+location of files: C:\xampp\CapstoneProject\LibraryWebsite
+
+login html: C:\xampp\htdocs\CapstoneProject\LibraryWebsite\login.html
+
+http://localhost/CapstoneProject/LibraryWebsite/database.php
+
+signup html: http://localhost/CapstoneProject/LibraryWebsite/signup.php

@@ -10,8 +10,10 @@ function goToSignup() {
 const maxAttempts = 5;
 const lockoutDuration = 30 * 60 * 1000;
 
+/**
 let accounts = [["max", "whi", "password123", "29AvenueStreet", "test@email.com"],
 ["andrew", "smith", "password456", "456OakAvenue", "andrew@email.com"]]; // Example existing accounts
+**/
 
 let count = 0;
 
