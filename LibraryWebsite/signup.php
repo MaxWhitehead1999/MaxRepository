@@ -1,5 +1,8 @@
 <?php
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 require "database.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -8,23 +11,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $password = $_POST["password"];
     $address = $_POST["address"];
-    $account_type = $_POST["account_type"];
     $phone = $_POST["phone"];
 
     // Hash the password before storing it in the database
     $password = password_hash($password, PASSWORD_DEFAULT);
 
     // Prepare and execute the SQL statement to insert the new user into the database
-    $sql = "INSERT INTO accounts (firstname, lastname, email, password, address, account_type, phone) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO accounts (first_name, last_name, email, password, address,  phone) VALUES (?, ?, ?, ?, ?, ?)";
 
     // Use prepared statements to prevent SQL injection
     $stmt = $conn->prepare($sql);
 
+    if (!$stmt) {
+        die("Prepare failed: " . $conn->error);
+    }
+
     // Bind the parameters to the prepared statement
-    $stmt->bind_param("sssssss", $firstname, $lastname, $email, $password, $address, $account_type, $phone);
+    $stmt->bind_param("ssssss", $firstname, $lastname, $email, $password, $address, $phone);
 
     if ($stmt->execute()) {
-        echo "Signup successful! You can now log in.";
+        header("Location: login.html");
+        exit();
     } else {
         echo "Error: " . $stmt->error;
     }

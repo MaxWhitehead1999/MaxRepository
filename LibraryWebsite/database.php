@@ -12,8 +12,5 @@ if($conn->connect_error){
     die("Database connection failed: " . $conn->connect_error);
 }
 
-// Used to check if the connection is successful
-echo "Database connected sucessfully";
-
 
 ?>

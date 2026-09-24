@@ -96,6 +96,17 @@ function loginValidation(password) {
         alert("Password must contain at least one special character.");
         return false;
     }
+
+    return true;
+}
+
+function validateSignup() {
+    let password = document.getElementById("password").value;
+    if (!loginValidation(password)) {
+        return false; // Stop form submission if password is invalid
+    }
+
+    return true;
 }
 
 
