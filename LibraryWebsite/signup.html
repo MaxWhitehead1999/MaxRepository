@@ -12,7 +12,7 @@
   <div class="inputContainer">
     <h1>Signup</h1>
 
-    <form action="signup.php" method="POST" onsubmit="return validateForm()">
+    <form action="signup.php" method="POST" onsubmit="return validateSignup()">
 
       <input type="text" name="firstname" class="defaultInput" placeholder="FirstName"><br><br>
 
@@ -22,13 +22,14 @@
 
       <input type="text" name="address" class="defaultInput" id="address" placeholder="Address"><br><br>
 
-      <input type="text" name="email" class="defaultInput" placeholder="Email"><br><br>
+      <input type="text" name="email" class="defaultInput" id = "email" placeholder="Email"><br><br>
 
       <input type="text" name="phone" class="defaultInput" placeholder="Phone Number"><br><br>
 
       <div class="btnSignupContainer">
         <button type="submit" class="signupBtn" >Signup</button>
       </div>
+
     </form>
 
   </div>

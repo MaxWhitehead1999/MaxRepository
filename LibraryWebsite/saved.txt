@@ -1,6 +1,6 @@
 example of stored password/username thats already stored within the system:
 
-username: Max@well.com
+email: Max@well.com
 
 password: P@ss1564
 
@@ -10,8 +10,51 @@ phpmyadmin: http://localhost/phpmyadmin/index.php?route=/sql&pos=0&db=mylibrary&
 
 location of files: C:\xampp\CapstoneProject\LibraryWebsite
 
-login html: C:\xampp\htdocs\CapstoneProject\LibraryWebsite\login.html
+login html: http://localhost/CapstoneProject/LibraryWebsite/login.html
 
 http://localhost/CapstoneProject/LibraryWebsite/database.php
 
-signup html: http://localhost/CapstoneProject/LibraryWebsite/signup.php
+signup html: http://localhost/CapstoneProject/LibraryWebsite/signup.html
+
+proper indentation shortcut: Shift + Alt + F
+
+test email: Test@test123.com
+
+password: Itpoo123$
+
+
+
+!!!!!!!!How to recover if database files are corrupted:!!!!!!!!
+
+1. shut down xampp
+
+2. go to C:\xampp\mysql on finder
+
+3. copy data and call it data_backup yyyy_mm_dd
+
+4. rename data to be data_broken #
+
+5. copy backup and rename it to data
+
+6. open xammp and start myphp
+
+7. if works go to: http://localhost/phpmyadmin/index.php
+
+8. recreate database call it mylibrary
+
+9. go to sql tab on top and paste:
+
+CREATE TABLE accounts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    address VARCHAR(255),
+    phone VARCHAR(30)
+);
+
+10. click go to create table then go to http://localhost/CapstoneProject/LibraryWebsite/signup.html
+
+11. complete inputs then signin, if no errors occur and values are saved in myphpadmin then this should
+be completed and you can continue with whateveri was working before this mess occured

@@ -1,6 +1,5 @@
 //use this please: file:///C:/Users/Maxwe/OneDrive/Documents/Software%20Capstone%20Proposal/CapstoneProject/LibraryWebsite/login.html
 
-
 function goToSignup() {
     window.location.href = "signup.html";
 }
@@ -10,23 +9,13 @@ function goToSignup() {
 const maxAttempts = 5;
 const lockoutDuration = 30 * 60 * 1000;
 
-/**
-let accounts = [["max", "whi", "password123", "29AvenueStreet", "test@email.com"],
-["andrew", "smith", "password456", "456OakAvenue", "andrew@email.com"]]; // Example existing accounts
-**/
-
 let count = 0;
-
-
 
 /**fix later so that after 5 attempts the error page is displayed then have it be on for 30 minutes */
 function goToMain() {
 
-
-
     emailInput = document.getElementById("email").value;
     passwordInput = document.getElementById("password").value;
-
 
     for (let i = 0; i < accounts.length; i++) {
 
@@ -80,18 +69,26 @@ function addNewAccount() {
 
 
 function loginValidation(password) {
-    if (password.length < 8) {
+
+    if( password.length === 0) {
+        alert("Password cannot be empty.");
+        return false;
+    } else if (password.length < 8) {
         alert("Password must be at least 8 characters long.");
         return false;
+
     } else if (!/[A-Z]/.test(password)) {
         alert("Password must contain at least one uppercase letter.");
         return false;
+
     } else if (!/[a-z]/.test(password)) {
         alert("Password must contain at least one lowercase letter.");
         return false;
+
     } else if (!/[0-9]/.test(password)) {
         alert("Password must contain at least one number.");
         return false;
+
     } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
         alert("Password must contain at least one special character.");
         return false;
@@ -100,13 +97,33 @@ function loginValidation(password) {
     return true;
 }
 
-function validateSignup() {
-    let password = document.getElementById("password").value;
-    if (!loginValidation(password)) {
-        return false; // Stop form submission if password is invalid
+
+
+function emailValidation(email) {
+    if(email.length === 0 ) {
+        alert("Email cannot be empty.");
+        return false;
     }
 
     return true;
+}
+
+
+
+function validateSignup() {
+    let password = document.getElementById("password").value;
+    let email = document.getElementById("email").value;
+    
+  
+    if (!emailValidation(email)) {
+        return false; // Stop execution if email is invalid
+    }
+
+    if (!loginValidation(password)) {
+        return false; // Stop execution if password is invalid
+    }
+    return true;
+    
 }
 
 

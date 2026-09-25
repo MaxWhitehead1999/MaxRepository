@@ -18,21 +18,27 @@
 
 <body>
 
+
   <div id="login" class="LoginInputContainer">
     <h1>Library Login</h1>
 
-    <div class="logininfo">
-      <button onclick="goToMain()">Login</button>
-      <input type="password" id="password" placeholder="password"><br><br>
-    </div>
-    <div class="logininfo">
-      <button onclick="goToSignup()">Signup</button>
-      <input type="email" id="email" placeholder="Email"><br><br>
-    </div>
 
-    <div class="hyperlink">
-      <a href="forgotpass.html">Forgot Password?</a>
-    </div>
+    <form action="login.php" method="POST">
+
+      <div class="logininfo">
+        <button type="submit">Login</button>
+        <input type="password" id="password" name = "password" placeholder="password"><br><br>
+      </div>
+      <div class="logininfo">
+        <button type = "button" onclick="goToSignup()">Signup</button>
+        <input type="email" id="email" name = "email" placeholder="Email"><br><br>
+      </div>
+
+      <div class="hyperlink">
+        <a href="forgotpass.html">Forgot Password?</a>
+      </div>
+
+    </form>
   </div>
 
   <script src="script.js"></script>
