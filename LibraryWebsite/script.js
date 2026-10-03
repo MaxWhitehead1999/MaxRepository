@@ -4,38 +4,8 @@ function goToSignup() {
     window.location.href = "signup.html";
 }
 
-/** Pass and username requirements */
 
-const maxAttempts = 5;
-const lockoutDuration = 30 * 60 * 1000;
 
-let count = 0;
-
-function addNewAccount() {
-
-    if (!loginValidation(document.getElementById("password").value)) {
-        return; // Stop execution if password is invalid
-    }
-
-    let newAccount = {
-        firstName: document.getElementById("firstName").value,
-        lastName: document.getElementById("lastName").value,
-        password: document.getElementById("password").value,
-        address: document.getElementById("address").value,
-        email: document.getElementById("email").value
-    };
-
-    accounts.push([
-        newAccount.firstName,
-        newAccount.lastName,
-        newAccount.password,
-        newAccount.address,
-        newAccount.email
-    ]);
-
-    window.location.href = "login.html";
-
-}
 
 
 /** functions used for password validation in signup menu, conditions include:
@@ -138,12 +108,17 @@ function lastNameValidation(lastName) {
         alert("Last name cannot be empty.");
         return false;
     }
+    return true;
 }
 
 
 
 
-/** functions used for signup validation in signup menu 
+/** functions used for signup validation in signup menu using if statements 
+ *  that call for checks on the email, password, phone number, address, 
+ *  first name, and last name. If any of these checks fail, the function 
+ *  will return false and stop execution. If all checks pass, the function 
+ *  will return true and allow the user to proceed with signing up.
  */
 function validateSignup() {
     let password = document.getElementById("password").value;
@@ -169,28 +144,35 @@ function validateSignup() {
         return false; // Stop execution if address is invalid
     }
 
-    if (!firstNameValidation(document.getElementById("firstName").value)) {
+    if (!firstNameValidation(firstName)) {
         return false; // Stop execution if first name is invalid
     }
 
-    if (!lastNameValidation(document.getElementById("lastName").value)) {
+    if (!lastNameValidation(lastName)) {
         return false; // Stop execution if last name is invalid
     }
 
     return true;
 }
 
-
-
-/* functions used for forgot password and logout buttons, they redirect the user to the login page */
+/* 
+ *functions used for forgot password and logout buttons, they redirect 
+ * user to the login page 
+ */
 function forgotPassword() {
     window.location.href = "login.html";
 }
 
+/* functions used for logout button, they redirect the user to the login page 
+ *
+ */
 function logout() {
     window.location.href = "login.html";
 }
 
+/* functions used for closing the error alert message, they hide the error alert
+ * message when the user clicks the close button
+ */
 function closeErrorAlert() {
     document.getElementById("errorAlert").style.display = "none";
 }

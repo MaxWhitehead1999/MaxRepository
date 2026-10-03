@@ -1,8 +1,5 @@
 example of stored password/username thats already stored within the system:
 
-email: Max@well.com
-
-password: P@ss1564
 
 Website: http://localhost/CapstoneProject/login.html
 
@@ -18,9 +15,19 @@ signup html: http://localhost/CapstoneProject/LibraryWebsite/signup.html
 
 proper indentation shortcut: Shift + Alt + F
 
-test email: Test@test123.com
+test Firstname: Maxwell
 
-password: Itpoo123$
+test Lastname: Whitehead
+
+test Password: P@ss1564
+
+test Address: 27AppleSt
+
+test Email: Max@well.com
+
+test phonenumber: 1234567890
+
+test BADpassword: Pass1
 
 
 
