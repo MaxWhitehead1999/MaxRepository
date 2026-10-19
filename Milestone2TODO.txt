@@ -1,0 +1,76 @@
+Milestone 2 TODO before November 5th:
+
+******************************************************************
+
+1, 1.1 *Already done, any additions will be optional for milestone* 2 at least
+
+> Implement client account creation and library membership
+
+>*technically already done but work on forgot pass feature 
+  along with 30 minute timeout if can.
+
+
+
+
+
+
+******************************************************************
+
+2, 2.1, 2.1, 2.1.1, 2.1.2, 2.1.3
+
+> Implement Search feature and catalog
+
+2. - System must require Search Catalogue of books available on the Website
+
+2.1 The system must allow the books to be filtered: 
+    ISBN, 
+    Title, 
+    Subtitle, 
+    Author, 
+    Edition, 
+    Publishing Company, 
+    publication data, 
+    format, 
+    Dewey Decimal Number, 
+    genre, 
+    audience, 
+    or page number
+
+2.1.1 book must display details including the above fields ^
+
+2.1.2 Search results must be sorted from A-Z, and Z-A
+
+2.1.3 Individual books can be searched via search bars
+
+******************************************************************
+IMPORTANT: Deploy Website, Use:  Render for it
+
+
+
+
+
+
+
+******************************************************************
+for testing this will include:
+
+> Front End Testing 7,8,9
+
+> API testing 1 and 2
+
+> Make sure to download and Use postman for API testing
+
+******************************************************************
+Optional:
+
+2.2 System must allow the users to check the availablility of the library books
+
+2.2.1 System may allow clients to check out a list of books that are currently checked out including
+      due dates and availablility
+
+2.2.2 System allows users to check out a book on the website before getting it
+      at the library as long as its available for checking out
+
+2.2.2.1 system must prevent checkout if books are overdue for user until book ISBN
+        returned and the late fee is paid
+
