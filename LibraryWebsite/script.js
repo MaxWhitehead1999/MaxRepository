@@ -1,12 +1,8 @@
-//use this please: file:///C:/Users/Maxwe/OneDrive/Documents/Software%20Capstone%20Proposal/CapstoneProject/LibraryWebsite/login.html
+
 
 function goToSignup() {
     window.location.href = "signup.html";
 }
-
-
-
-
 
 /** functions used for password validation in signup menu, conditions include:
  *  not leaving the password blank,
@@ -112,8 +108,6 @@ function lastNameValidation(lastName) {
 }
 
 
-
-
 /** functions used for signup validation in signup menu using if statements 
  *  that call for checks on the email, password, phone number, address, 
  *  first name, and last name. If any of these checks fail, the function 
@@ -160,6 +154,8 @@ function validateSignup() {
  * user to the login page 
  */
 function forgotPassword() {
+
+    alert("Email Has sent a password reset link to your email address.");
     window.location.href = "login.html";
 }
 

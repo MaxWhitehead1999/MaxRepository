@@ -13,6 +13,8 @@ http://localhost/CapstoneProject/LibraryWebsite/database.php
 
 signup html: http://localhost/CapstoneProject/LibraryWebsite/signup.html
 
+myphpadmin: http://localhost/phpmyadmin/index.php
+
 proper indentation shortcut: Shift + Alt + F
 
 test Firstname: Maxwell

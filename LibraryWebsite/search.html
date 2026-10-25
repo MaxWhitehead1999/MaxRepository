@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+
+<!-- http://localhost/CapstoneProject/LibraryWebsite/search.html -->
 <html lang="en">
 
 <head>
@@ -21,9 +23,73 @@
     <!-- basic title page for testing -->
     <h1 class="welcome">Search Book</h1>
 
-    List result of stored books in the database, with a search bar to filter through the books.
+    <div class="searchContainer">
+        <div class="searchFilterAndSort">
+
+            <div class="searchFilter">
+                <h2>Filter By:</h2>
+                <select id="filterSelect" class="filterSelect">
+                    <option value="isbn">ISBN</option>
+                    <option value="title">Title</option>
+                    <option value="subtitle">Subtitle</option>
+                    <option value="author">Author</option>
+                    <option value="Editor">Editor</option>
+                    <option value="publisher">Publisher</option>
+                    <option value="publicationData">Publication Date</option>
+                    <option value="format">Format</option>
+                    <option value="deweydecimalnumber">Dewey Decimal Number</option>
+                    <option value="genre">Genre</option>
+                    <option value="audience">Audience</option>
+                    <option value="pagenumber">Page Number</option>
+
+                </select>
+            </div>
+
+
+            <div class="searchFilter">
+                <h2>Sort By:</h2>
+                <select id="sort">
+                    <option value="ascending">A-Z</option>
+                    <option value="descending">Z-A</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="searchSearch">
+            <h2>Search:</h2>
+            <input type="text" id="searchInput" class="searchInput" placeholder="Search for books...">
+        </div>
+
+    </div>
+
+
+
+
+
+    <!-- Later will only include title, ISBN, Author, and Genre being displayed -->
+
     <div class="mainContain">
-        
+        <table class="searchResults">
+            <tbody id="searchResults">
+                <tr>
+                    <td>
+                        <h3>Title</h3>
+                        <p>ISBN</p>
+                        <sub>Subtitle</sub>
+                        <p>Author</p>
+                        <p>Edition</p>
+                        <p>Publishing Company</p>
+                        <p>Publication Date</p>
+                        <p>Format</p>
+                        <p>Dewey Decimal Number</p>
+                        <p>Genre</p>
+                        <p>Audience</p>
+                        <p>Page Number</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <script src="script.js"></script>

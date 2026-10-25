@@ -1,4 +1,4 @@
-
+//Javascript is unused now that im focusing on using php for the backend, but ill keep it here in case i want to use it later.
 const Database = require('./database');
 const express = require('express');
 const path = require('path');

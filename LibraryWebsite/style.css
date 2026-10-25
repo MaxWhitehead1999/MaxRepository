@@ -251,6 +251,90 @@ h1 {
     color: red;
 }
 
+/* Search Book Styles */
+.searchContainer{
+    
+    width: 60%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom: 20px;
+    padding: 20px;
+    padding-bottom: 10px;
+    border: 2px solid black;
+}
+
+
+
+.searchContainer h2 {
+    margin: 0;
+    white-space: nowrap;
+}
+
+.searchResults {
+    width: 100%;
+    border: 1px solid black;
+    padding: 15px;
+    
+    text-align: left;
+}
+
+.searchFilterAndSort {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.searchFilter {
+    display:flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1 1 250px;
+    min-width: 0;
+
+}
+
+.searchSearch {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.searchInput{
+    flex: 1;
+    padding: 8px;
+}
+
+input{
+    width: 100%;
+}
+
+
+
+#bookTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.filterSelect, #sort  {
+    flex: 1;
+    min-width: 0;
+    height: 45px;
+    box-sizing: border-box;
+   
+   
+}
+
+
+
+#searchInput {
+    width: 300px;
+    padding: 8px;
+}
+
 
 
 

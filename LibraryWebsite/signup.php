@@ -1,11 +1,14 @@
 <?php
 
+// Enable error reporting for debugging
 error_reporting(E_ALL);
+// Display errors on the page
 ini_set('display_errors', 1);
-
 require "database.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    // Get the form data from the POST request
     $firstname = $_POST["firstname"];
     $lastname = $_POST["lastname"];
     $email = $_POST["email"];
