@@ -14,7 +14,7 @@ function goToSignup() {
  */
 function loginValidation(password) {
 
-    if( password.length === 0) {
+    if (password.length === 0) {
         alert("Password cannot be empty.");
         return false;
     } else if (password.length < 8) {
@@ -48,7 +48,7 @@ function loginValidation(password) {
  *  email must include a @ and a . within
  */
 function emailValidation(email) {
-    if(email.length === 0 ) {
+    if (email.length === 0) {
         alert("Email cannot be empty.");
         return false;
     } else if (email.length < 5) {
@@ -57,7 +57,7 @@ function emailValidation(email) {
     } else if (!email.includes("@") || !email.includes(".")) {
         alert("Please enter a valid email address that includes an '@' symbol and a domain.");
         return false;
-    } 
+    }
     return true;
 }
 
@@ -121,8 +121,8 @@ function validateSignup() {
     let address = document.getElementById("address").value;
     let firstName = document.getElementById("firstName").value;
     let lastName = document.getElementById("lastName").value;
-    
-  
+
+
     if (!emailValidation(email)) {
         return false; // Stop execution if email is invalid
     }
@@ -172,5 +172,34 @@ function logout() {
 function closeErrorAlert() {
     document.getElementById("errorAlert").style.display = "none";
 }
+
+async function fetchBooks() {
+    const response = await fetch('getBooks.php');
+    const books = await response.json();
+
+    const table = document.getElementById('searchResults');
+
+    table.innerHTML = '';
+
+    books.forEach(book => {
+        const row = document.createElement('tr');
+        const cell = document.createElement('td');
+        const title = document.createElement('h3');
+        title.textContent = book.title;
+
+        const details = document.createElement('p');
+        details.textContent = "ISBN: " + (book.isbn ?? "N/A") +
+            ", Author: " + (book.author ?? "N/A") +
+            ", Publisher: " + (book.publisher ?? "N/A") +
+            ", Genre: " + (book.genre ?? "N/A");
+
+        cell.appendChild(title);
+        cell.appendChild(details);
+        row.appendChild(cell);
+        table.appendChild(row);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', fetchBooks);
 
 
