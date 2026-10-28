@@ -174,19 +174,43 @@ function closeErrorAlert() {
 }
 
 
-
+/* Retrieves books from MySQL database which displays, sorts and filters them
+ * on the search.html web page. It also grants the users the ability to click on a
+ * hyper link that leads to bookresult.html that displays the data of the particular
+ * book from the hyperlink
+ */
 async function fetchBooks() {
+    //retrieves books from myLibrary sql on myphpadmin using getBooks.php
     const response = await fetch('getBooks.php');
     const books = await response.json();
 
+    // Selection Options for search page includes the filter dropdown, sort dropdown, and search bar
+    const filterSelect = document.getElementById('filterSelect').value;
     const sortSelect = document.getElementById('sort').value;
-
     const searchInput = document.getElementById('searchInput').value.toLowerCase();
 
+    
+
+    // determines which books should appear which includes a default filter option
     const filteredBooks = books.filter(book => {
-        return book.title.toLowerCase().includes(searchInput);
+
+
+        if(filterSelect === 'default') {
+            return book.title.toLowerCase().includes(searchInput);
+        }
+
+        // filters out by selected field of book value then enforces conditions to ensure no field is left null
+        const value = book[filterSelect];
+
+        return value !== null &&
+            value!== undefined &&
+            String(value).trim() !== '' &&
+            String(value).trim().toUpperCase() !== 'N/A' &&
+            String(value).toLowerCase().includes(searchInput);
     });
 
+
+    // Sort the filtered books based on the selected option, 0 sets to default
     filteredBooks.sort((a, b) => {
         if (sortSelect === 'ascending') {
             return a.title.localeCompare(b.title);
@@ -196,16 +220,18 @@ async function fetchBooks() {
         return 0; // Default sorting (no change)
     });
 
-    
-
+    // finds and clears the results table to prevent more rows of the same books from being implemented if a filter, search, or sort is made
     const table = document.getElementById('searchResults');
-
     table.innerHTML = '';
 
+    
     filteredBooks.forEach(book => {
+        
+        // Displays each book with a new table row and table collumn for data
         const row = document.createElement('tr');
         const cell = document.createElement('td');
 
+        // allows for a clickable Title that will lead the user to bookresult.html
         const title = document.createElement('h3');
         const link = document.createElement('a');
 
@@ -214,6 +240,7 @@ async function fetchBooks() {
 
         title.appendChild(link);
 
+        // displays any additional information added below the title of each book
         const details = document.createElement('p');
         details.textContent = "ISBN: " + (book.isbn ?? "N/A") +
             ", Author: " + (book.author ?? "N/A") +
@@ -227,9 +254,12 @@ async function fetchBooks() {
     });
 }
 
+// adds event listeners for sort dropdown, search input, and filter dropdown for search page
 document.addEventListener('DOMContentLoaded', () => {
     fetchBooks();
     document.getElementById('sort').addEventListener('change', fetchBooks);
 
     document.getElementById('searchInput').addEventListener('input', fetchBooks);
+
+    document.getElementById('filterSelect').addEventListener('change',fetchBooks);
 });

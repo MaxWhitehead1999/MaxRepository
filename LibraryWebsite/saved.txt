@@ -84,7 +84,11 @@ CREATE TABLE books (
     page_number INT
 );
 
-10. click go to create table then go to http://localhost/CapstoneProject/LibraryWebsite/signup.html
+11. type SELECT * FROM books; in myLibrary sql
 
-11. complete inputs then signin, if no errors occur and values are saved in myphpadmin then this should
+12. type http://localhost/CapstoneProject/LibraryWebsite/importLibrarySearch.php in a url
+
+13. click go to create table then go to http://localhost/CapstoneProject/LibraryWebsite/signup.html
+
+14. complete inputs then signin, if no errors occur and values are saved in myphpadmin then this should
 be completed and you can continue with whateveri was working before this mess occured
