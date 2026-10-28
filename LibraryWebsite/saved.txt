@@ -17,6 +17,8 @@ myphpadmin: http://localhost/phpmyadmin/index.php
 
 proper indentation shortcut: Shift + Alt + F
 
+refresh shortcut = Ctrl + Shift + R
+
 test Firstname: Maxwell
 
 test Lastname: Whitehead
@@ -30,6 +32,7 @@ test Email: Max@well.com
 test phonenumber: 1234567890
 
 test BADpassword: Pass1
+
 
 
 

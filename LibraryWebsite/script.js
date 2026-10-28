@@ -173,19 +173,46 @@ function closeErrorAlert() {
     document.getElementById("errorAlert").style.display = "none";
 }
 
+
+
 async function fetchBooks() {
     const response = await fetch('getBooks.php');
     const books = await response.json();
+
+    const sortSelect = document.getElementById('sort').value;
+
+    const searchInput = document.getElementById('searchInput').value.toLowerCase();
+
+    const filteredBooks = books.filter(book => {
+        return book.title.toLowerCase().includes(searchInput);
+    });
+
+    filteredBooks.sort((a, b) => {
+        if (sortSelect === 'ascending') {
+            return a.title.localeCompare(b.title);
+        } else if (sortSelect === 'descending') {
+            return b.title.localeCompare(a.title);
+        }
+        return 0; // Default sorting (no change)
+    });
+
+    
 
     const table = document.getElementById('searchResults');
 
     table.innerHTML = '';
 
-    books.forEach(book => {
+    filteredBooks.forEach(book => {
         const row = document.createElement('tr');
         const cell = document.createElement('td');
+
         const title = document.createElement('h3');
-        title.textContent = book.title;
+        const link = document.createElement('a');
+
+        link.textContent = book.title;
+        link.href = 'bookresult.html?id=' + book.id;
+
+        title.appendChild(link);
 
         const details = document.createElement('p');
         details.textContent = "ISBN: " + (book.isbn ?? "N/A") +
@@ -200,6 +227,9 @@ async function fetchBooks() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', fetchBooks);
+document.addEventListener('DOMContentLoaded', () => {
+    fetchBooks();
+    document.getElementById('sort').addEventListener('change', fetchBooks);
 
-
+    document.getElementById('searchInput').addEventListener('input', fetchBooks);
+});
