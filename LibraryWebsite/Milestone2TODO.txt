@@ -57,7 +57,7 @@ for testing this will include:
 
 > Front End Testing 7,8,9
 
-> API testing 1 and 2
+> API testing 1
 
 > Make sure to download and Use postman for API testing
 
