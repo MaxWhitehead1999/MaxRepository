@@ -1,0 +1,63 @@
+******************************************************************
+> Implement Checkout system for user (apply some account implementation)
+
+2.2, 2.2.1
+2.2.2, 2.2.2.1, 3.3.1
+
+******************************************************************
+What to work on before Milestone 3
+
+2.2	System must allow the users to check the availability of the libraries books.
+2.2.1	system may allow clients to check out a list of books that are currently checked out including due dates and availability.
+2.2.2	the system must allow users to check out a book on the website before getting it at the library as long as it’s available for checking out.
+2.2.2.1 system must prevent checkout if books are overdue for user until the book is returned and the late fee is paid.
+3.3.1.	Client is charged a dollar per day after overdue date until a maximum of 25$ is charged.
+
+******************************************************************
+Tests before Milestone 3:
+
+Postman:
+----------- API Testing 1 -----------
+User ID: 145, Book ID: 74
+Searches for specific Book title using API
+
+----------- API Testing 2 -----------
+User ID: 145, Book status: (overdue)
+User Attempts checkout with overdue book
+
+----------- API TESTING 3 -----------
+Book is overdue by 3 days, a dollar per day
+Calculate overdue late fees
+
+----------- API Testing 4 -----------
+Overdue late fee is beyond capped point, so 27 days should be 25$
+Book is overdue by about 27 days
+
+******************************************************************
+OPTIONAL:
+
+Implement all details of account in profile page and have them be saved between accounts
+
+Allow the user creation of a librarian account
+
+in addition to the above, use postman to perform CRUD actions to the data
+
+***Security Testing***
+
+Install OWASP Zap for security Testing
+
+****maybe have some security Testing as well before next Milestone****
+Securit Testing 1 and 3 could technically be done now
+
+
+******************************************************************
+REQUIRED FOR CapstoneProject:
+✓ Must use a relational database
+✓ Must use technology and languages taught in semesters 1-4 (.NET, PHP,
+Javascript, Laravel, React)
+• Must include user accounts with at least two roles
+✓ Must do something with user input, not just display static pages
+• Must perform CRUD actions to data – Create, Read, Update, Delete
+• Must include security and accessibility functionality
+✓ Must be deployed
+
