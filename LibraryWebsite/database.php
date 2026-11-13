@@ -10,12 +10,15 @@
 //$password = getenv('DB_PASSWORD');
 //$database = getenv('DB_NAME');
 
+
 if(getenv('DB_HOST')) {
+    // Render environment configuration
     $host = getenv('DB_HOST');
     $username = getenv('DB_USER');
     $password = getenv('DB_PASSWORD');
     $database = getenv('DB_NAME');
 } else {
+    //Xammp Root cOnfiguration
     $host = "localhost";
     $username = "root";
     $password = "";

@@ -7,7 +7,7 @@ require "database.php";
 
 //echo "NEW IMPORTER IS RUNNING<br>";
 
-// new books imported from open library
+// new books imported from open library includes genres as well as the book the Hunger games
 $searches = [
     ["subject" => "fiction", "limit" => 10],
     ["subject" => "horror", "limit" => 10],
@@ -17,15 +17,18 @@ $searches = [
     ["title" => "The Hunger Games", "limit" => 1]
 ];
 
+// Example of a search query for "The Hunger Games" by Suzanne Collins
 $url = "https://openlibrary.org/search.json?title="
     . urlencode("The Hunger Games")
     . "&author=" . urlencode("Suzanne Collins")
     . "&limit=5";
 
 
+// Example of a search query for "The Hunger Games" by Suzanne Collins
 foreach ($searches as $search){
     $limit = $search["limit"];
 
+    // Check if the search is by title or subject and construct the appropriate URL
     if(isset($search["title"])) {
 
         $url = "https://openlibrary.org/search.json?title="
@@ -44,14 +47,17 @@ foreach ($searches as $search){
         $genre = ucwords(str_replace("_", " ", $subject));
     }
 
+    // Fetches the response from the Open Library API
     $responce = file_get_contents($url);
 
     if($responce === false) {
         continue;
     }
 
+    // Decodes the JSON response into an associative array
     $data = json_decode($responce, true);
 
+    // Checks if the "docs" key exists in the response data and contains an array of books
     echo "Books returned from API: " . count($data["docs"] ?? []) . "<br>";
    
     // Inserts multiple books into the database using a prepared statement to prevent SQL injection
@@ -111,8 +117,5 @@ foreach ($searches as $search){
 
 $conn->close();
 echo "Books imported successfully!<br>";
-
-
-
 
 ?>

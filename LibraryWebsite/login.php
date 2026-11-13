@@ -29,6 +29,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $_SESSION["login_attempts"] = 0;
 
+        $_SESSION["user_id"] = $account["id"];
+        $_SESSION["first_name"] = $account["first_name"];
+        $_SESSION["last_name"] = $account["last_name"];
+        $_SESSION["email"] = $account["email"];
+        $_SESSION["address"] = $account["address"];
+        $_SESSION["phone"] = $account["phone"];
+        
+
         // Redirect to the main page
         header("Location: main.html");
         exit();

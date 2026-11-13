@@ -174,6 +174,54 @@ function closeErrorAlert() {
 }
 
 
+
+/**
+ * Gets user account information from the server and updates the profile page with the retrieved data.
+ * This function fetches the account information from the server using a GET request to "getAccount.php".
+ * It then updates the corresponding HTML elements on the profile page with the retrieved data.
+ * If any error occurs during the fetch operation, it logs the error to the console.
+ */
+function getAccount() {
+
+    fetch("getAccount.php")
+        .then(response => response.json())
+        .then(account => {
+
+            if (document.getElementById("firstName")) {
+                document.getElementById("firstName").textContent =
+                    account.first_name;
+            }
+
+            if (document.getElementById("lastName")) {
+                document.getElementById("lastName").textContent =
+                    account.last_name;
+            }
+
+            if (document.getElementById("email")) {
+                document.getElementById("email").textContent =
+                    account.email;
+            }
+
+            if (document.getElementById("address")) {
+                document.getElementById("address").textContent =
+                    account.address;
+            }
+
+            if (document.getElementById("phone")) {
+                document.getElementById("phone").textContent =
+                    account.phone;
+            }
+
+            if (document.getElementById("welcome")) {
+                document.getElementById("welcome").textContent =
+                    "Welcome " + account.first_name;
+            }
+
+        })
+        .catch(error => console.error(error));
+}
+
+
 /* Retrieves books from MySQL database which displays, sorts and filters them
  * on the search.html web page. It also grants the users the ability to click on a
  * hyper link that leads to bookresult.html that displays the data of the particular
@@ -252,6 +300,8 @@ async function fetchBooks() {
         row.appendChild(cell);
         table.appendChild(row);
     });
+
+
 }
 
 // adds event listeners for sort dropdown, search input, and filter dropdown for search page
