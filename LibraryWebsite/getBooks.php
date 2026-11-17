@@ -5,8 +5,21 @@ ini_set('display_errors', 1);
 
 require "database.php";
 
-$sql = "SELECT * FROM books";
-$result = $conn->query($sql);
+$id = $_GET["id"] ?? "";
+
+if ($id !== "") {
+    $sql = "SELECT * FROM books WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+} else {
+    $sql = "SELECT * FROM books";
+    $result = $conn->query($sql);
+}
+
 
 if(!$result) {
     die("Query failed: " . $conn->error);
