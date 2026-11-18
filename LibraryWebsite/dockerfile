@@ -1,13 +1,13 @@
-# Use the official PHP image with Apache
+#Use the official PHP image with Apache
 FROM php:8.3-apache
 
-#Install mysqli extension
+# Install mysqli extension
 RUN docker-php-ext-install mysqli
 
-#Set the working directory to /var/www/html
+# Set the working directory to /var/www/html
 COPY . /var/www/html/
 
-#Change the Apache port to 10000
+# Change the Apache port to 10000
 RUN echo "Listen 0.0.0.0:10000" > /etc/apache2/ports.conf \
     && sed -i 's/:80>/:10000>/' /etc/apache2/sites-available/000-default.conf
 

@@ -237,13 +237,13 @@ async function fetchBooks() {
     const sortSelect = document.getElementById('sort').value;
     const searchInput = document.getElementById('searchInput').value.toLowerCase();
 
-    
+
 
     // determines which books should appear which includes a default filter option
     const filteredBooks = books.filter(book => {
 
 
-        if(filterSelect === 'default') {
+        if (filterSelect === 'default') {
             return book.title.toLowerCase().includes(searchInput);
         }
 
@@ -251,7 +251,7 @@ async function fetchBooks() {
         const value = book[filterSelect];
 
         return value !== null &&
-            value!== undefined &&
+            value !== undefined &&
             String(value).trim() !== '' &&
             String(value).trim().toUpperCase() !== 'N/A' &&
             String(value).toLowerCase().includes(searchInput);
@@ -272,9 +272,9 @@ async function fetchBooks() {
     const table = document.getElementById('searchResults');
     table.innerHTML = '';
 
-    
+
     filteredBooks.forEach(book => {
-        
+
         // Displays each book with a new table row and table collumn for data
         const row = document.createElement('tr');
         const cell = document.createElement('td');
@@ -302,14 +302,83 @@ async function fetchBooks() {
     });
 
 
+    // adds event listener to each book title link to handle checkout when clicked
+    async function checkoutBook(bookID) {
+
+        try {
+
+            // Sends a POST request to the server with the book ID to checkout the book
+            const response = await fetch("checkoutBook.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    book_id: bookID
+                })
+            });
+
+            // Parses the JSON response from the server if the request was successful and displays 
+            // an alert with the result message if not successful, displays 
+            // an alert with the error message
+            const result = await response.json();
+
+            if (result.success) {
+
+                alert(result.message);
+
+            } else {
+
+                alert("Checkout Failed: " + result.message);
+
+            }
+
+        } catch (error) {
+
+            alert("An error occurred while checking out the book.");
+            console.error(error);
+
+        }
+
+
+        function setupCheckoutButton() {
+
+            const checkoutBtn = document.getElementById("checkoutBtn");
+
+            if (!checkoutBtn) {
+                return;
+            }
+
+            // Get the book ID from the URL
+            const params = new URLSearchParams(window.location.search);
+            const bookID = params.get("id");
+
+            if (!bookID || !/^[1-9]\d*$/.test(bookID)) {
+                checkoutBtn.disabled = true;
+                return;
+            }
+
+            // Check out whichever book is currently displayed
+            checkoutBtn.addEventListener("click", function () {
+                checkoutBook(Number(bookID));
+            });
+        }
+    }
+
+
+
+
 }
 
 // adds event listeners for sort dropdown, search input, and filter dropdown for search page
 document.addEventListener('DOMContentLoaded', () => {
-    fetchBooks();
-    document.getElementById('sort').addEventListener('change', fetchBooks);
+    if (document.getElementById('sort')) {
+        fetchBooks();
 
-    document.getElementById('searchInput').addEventListener('input', fetchBooks);
+        document.getElementById('sort').addEventListener('change', fetchBooks);
+        document.getElementById('searchInput').addEventListener('input', fetchBooks);
+        document.getElementById('filterSelect').addEventListener('change', fetchBooks);
+    }
 
-    document.getElementById('filterSelect').addEventListener('change',fetchBooks);
+    setupCheckoutButton();
 });
