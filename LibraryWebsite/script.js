@@ -301,77 +301,113 @@ async function fetchBooks() {
         table.appendChild(row);
     });
 
-
-    // adds event listener to each book title link to handle checkout when clicked
-    async function checkoutBook(bookID) {
-
-        try {
-
-            // Sends a POST request to the server with the book ID to checkout the book
-            const response = await fetch("checkoutBook.php", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    book_id: bookID
-                })
-            });
-
-            // Parses the JSON response from the server if the request was successful and displays 
-            // an alert with the result message if not successful, displays 
-            // an alert with the error message
-            const result = await response.json();
-
-            if (result.success) {
-
-                alert(result.message);
-
-            } else {
-
-                alert("Checkout Failed: " + result.message);
-
-            }
-
-        } catch (error) {
-
-            alert("An error occurred while checking out the book.");
-            console.error(error);
-
-        }
+}
 
 
-        function setupCheckoutButton() {
+async function getUserCheckouts() {
 
-            const checkoutBtn = document.getElementById("checkoutBtn");
+    const container = document.getElementById("userCheckouts");
 
-            if (!checkoutBtn) {
-                return;
-            }
-
-            // Get the book ID from the URL
-            const params = new URLSearchParams(window.location.search);
-            const bookID = params.get("id");
-
-            if (!bookID || !/^[1-9]\d*$/.test(bookID)) {
-                checkoutBtn.disabled = true;
-                return;
-            }
-
-            // Check out whichever book is currently displayed
-            checkoutBtn.addEventListener("click", function () {
-                checkoutBook(Number(bookID));
-            });
-        }
+    if (!container) {
+        return;
     }
 
+    try {
+        const response = await fetch("getUserCheckouts.php");
 
+        if (!response.ok) {
+            throw new Error("Unable to retrieve books.");
+        }
 
+        const books = await response.json();
 
+        container.innerHTML = "";
+
+        if (books.length === 0) {
+            container.textContent = "No books currently checked out.";
+            return;
+        }
+
+        books.forEach(book => {
+
+            const paragraph = document.createElement("p");
+            const link = document.createElement("a");
+
+            link.textContent = book.title;
+            link.href = "bookresult.html?id=" + book.id;
+
+            paragraph.appendChild(link);
+            container.appendChild(paragraph);
+
+        });
+
+    } catch (error) {
+        console.error("Error loading checked out books:", error);
+    }
 }
+
+
+
+    
+
+    // Sends the selected book ID to checkoutBook.php
+async function checkoutBook(bookID) {
+
+    try {
+        const response = await fetch("checkoutBook.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                book_id: bookID
+            })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            alert(result.message);
+        } else {
+            alert("Checkout Failed: " + result.message);
+        }
+
+    } catch (error) {
+        alert("An error occurred while checking out the book.");
+        console.error(error);
+    }
+}
+
+
+// Connects the Check Out button to the selected book
+function setupCheckoutButton() {
+
+    const checkoutBtn = document.getElementById("checkoutBtn");
+
+    if (!checkoutBtn) {
+        return;
+    }
+
+    // Get the selected book ID from the URL
+    const params = new URLSearchParams(window.location.search);
+    const bookID = params.get("id");
+
+    if (!bookID || !/^[1-9]\d*$/.test(bookID)) {
+        checkoutBtn.disabled = true;
+        return;
+    }
+
+    checkoutBtn.addEventListener("click", function () {
+        checkoutBook(Number(bookID));
+    });
+}
+
+
 
 // adds event listeners for sort dropdown, search input, and filter dropdown for search page
 document.addEventListener('DOMContentLoaded', () => {
+
+    // Only run search functions on search.html
     if (document.getElementById('sort')) {
         fetchBooks();
 
@@ -380,5 +416,9 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('filterSelect').addEventListener('change', fetchBooks);
     }
 
+    // Connect checkout button on bookresult.html
     setupCheckoutButton();
+
+    
+    getUserCheckouts();
 });
