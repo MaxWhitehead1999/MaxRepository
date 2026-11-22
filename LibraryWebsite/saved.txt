@@ -19,6 +19,8 @@ proper indentation shortcut: Shift + Alt + F
 
 refresh shortcut = Ctrl + Shift + R
 
+paste on teminal = Ctrl + Shift + V
+
 test Firstname: Maxwell
 
 test Lastname: Whitehead

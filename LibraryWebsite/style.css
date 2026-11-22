@@ -85,6 +85,7 @@ h1 {
     border: 2px solid black;
 }
 
+
 .checkout, .overdue {
     width: 50%;
     border: 2px solid black;
@@ -95,6 +96,29 @@ h1 {
 .checkout td, .overdue td {
     padding: 10px;
     text-align: left;
+}
+
+
+.userContain {
+    width: 50%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 5%;
+    padding: 20px;
+    border: 2px solid black;
+
+    
+}
+
+.userCheck, .userDue {
+    width: 100%;
+    border: 2px solid black;
+    margin-bottom: 20px;
+}
+
+.userCheck td, .userDue td {
+    padding: 10px;
+    text-align: center;
 }
 
 
