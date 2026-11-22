@@ -118,6 +118,32 @@ try {
         );
     }
 
+
+    // Check if the current user already has this book
+    $stmt = $conn->prepare(
+        "SELECT COUNT(*) AS total
+         FROM checkouts
+         WHERE user_id = ?
+         AND book_id = ?
+         AND status IN ('reserved', 'checked_out')"
+    );
+
+    $stmt->bind_param("ii", $userID, $bookID);
+    $stmt->execute();
+
+    $alreadyCheckedOut = $stmt->get_result()->fetch_assoc();
+
+    if ($alreadyCheckedOut["total"] > 0) {
+        $conn->rollback();
+
+        sendResponse(
+            409,
+            false,
+            "You have already checked out this book."
+        );
+    }
+
+
     // Check if the book is already reserved or checked out
     $stmt = $conn->prepare(
         "SELECT COUNT(*) AS total
@@ -125,6 +151,9 @@ try {
          WHERE book_id = ?
          AND status IN ('reserved', 'checked_out')"
     );
+
+
+    
 
     $stmt->bind_param("i", $bookID);
     $stmt->execute();
@@ -170,5 +199,10 @@ try {
         "Checkout failed. Please try again."
     );
 }
+
+
+
+
+
 
 ?>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Edit Profile</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+    <nav class="menuRibbon">
+        <ul>
+            <li><a href="main.html">Home</a></li>
+            <li><a href="search.html">SearchBook</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="login.html">Logout</a></li>
+        </ul>
+    </nav>
+
+  <div class="inputContainer">
+    <h1>Edit Profile</h1>
+
+    <form action="signup.php" method="POST" onsubmit="return validateSignup()">
+
+      <input type="text" name="firstname" class="defaultInput" id="firstName" placeholder="FirstName*"><br><br>
+
+      <input type="text" name="lastname" class="defaultInput" id="lastName" placeholder="LastName*"><br><br>
+
+      <input type="text" name="address" class="defaultInput" id="address" placeholder="Address*"><br><br>
+
+      <input type="text" name="email" class="defaultInput" id = "email" placeholder="Email*"><br><br>
+
+      <div class="btnSignupContainer">
+        <button type="submit" class="signupBtn" >Save Changes</button>
+      </div>
+
+    </form>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
