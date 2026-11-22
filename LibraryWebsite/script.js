@@ -348,9 +348,9 @@ async function getUserCheckouts() {
 
 
 
-    
 
-    // Sends the selected book ID to checkoutBook.php
+
+// Sends the selected book ID to checkoutBook.php
 async function checkoutBook(bookID) {
 
     try {
@@ -367,19 +367,23 @@ async function checkoutBook(bookID) {
         const result = await response.json();
 
         if (result.success) {
-            alert(result.message);
+            return true;
         } else {
             alert("Checkout Failed: " + result.message);
+            return false;
         }
 
     } catch (error) {
         alert("An error occurred while checking out the book.");
+
         console.error(error);
+        return false;
     }
 }
 
 
 // Connects the Check Out button to the selected book
+
 function setupCheckoutButton() {
 
     const checkoutBtn = document.getElementById("checkoutBtn");
@@ -388,7 +392,6 @@ function setupCheckoutButton() {
         return;
     }
 
-    // Get the selected book ID from the URL
     const params = new URLSearchParams(window.location.search);
     const bookID = params.get("id");
 
@@ -398,8 +401,137 @@ function setupCheckoutButton() {
     }
 
     checkoutBtn.addEventListener("click", function () {
-        checkoutBook(Number(bookID));
+
+        let checkoutList = JSON.parse(
+            sessionStorage.getItem("checkoutList") || "[]"
+        );
+
+        // Prevent adding the same book twice
+        if (checkoutList.includes(Number(bookID))) {
+            alert("This book is already in your checkout list.");
+            return;
+        }
+
+        checkoutList.push(Number(bookID));
+
+        sessionStorage.setItem(
+            "checkoutList",
+            JSON.stringify(checkoutList)
+        );
+
+        alert("Book added to checkout list!");
     });
+}
+
+async function checkoutAllBooks() {
+
+    const checkoutList = JSON.parse(
+        sessionStorage.getItem("checkoutList") || "[]"
+    );
+
+    if (checkoutList.length === 0) {
+        alert("no books to check out");
+        return;
+    }
+
+    const checkoutBtn = document.getElementById("checkoutAllBtn");
+
+    checkoutBtn.disabled = true;
+
+    const remainingBooks = [];
+    let successCount = 0;
+
+    try {
+        for (const bookID of checkoutList) {
+
+            const success = await checkoutBook(bookID);
+
+            if (success) {
+                successCount++;
+            } else {
+                remainingBooks.push(bookID);
+            }
+        }
+
+        sessionStorage.setItem(
+            "checkoutList",
+            JSON.stringify(remainingBooks)
+        );
+
+        await displayCheckoutList();
+
+        if (successCount > 0) {
+            alert(successCount + " book(s) successfully reserved!");
+        }
+
+    } finally {
+        checkoutBtn.disabled = false;
+    }
+}
+
+// Displays the list of books in the checkout list on addToCheckout.html
+async function displayCheckoutList() {
+
+    const container = document.getElementById("checkoutList");
+
+    if (!container) {
+        return;
+    }
+
+    const checkoutList = JSON.parse(
+        sessionStorage.getItem("checkoutList") || "[]"
+    );
+
+    container.innerHTML = "";
+
+    if (checkoutList.length === 0) {
+        container.textContent = "Books yet to be checked out";
+        return;
+    }
+
+    try {
+        const response = await fetch("getBooks.php");
+
+        if (!response.ok) {
+            throw new Error("Unable to retrieve books.");
+        }
+
+        const books = await response.json();
+
+        checkoutList.forEach(bookID => {
+
+            const book = books.find(
+                book => Number(book.id) === bookID
+            );
+
+            if (!book) {
+                return;
+            }
+
+            const paragraph = document.createElement("p");
+            const link = document.createElement("a");
+
+            link.textContent = book.title;
+            link.href = "bookresult.html?id=" + book.id;
+
+            paragraph.appendChild(link);
+            container.appendChild(paragraph);
+        });
+
+    } catch (error) {
+        console.error("Error displaying checkout list:", error);
+        container.textContent = "Unable to load checkout list.";
+    }
+}
+
+// Clears the checkout list from session storage and updates the display
+function clearCheckoutList() {
+
+    sessionStorage.removeItem("checkoutList");
+
+    displayCheckoutList();
+
+    alert("Checkout list cleared!");
 }
 
 
@@ -419,6 +551,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // Connect checkout button on bookresult.html
     setupCheckoutButton();
 
-    
+
     getUserCheckouts();
+
+    const checkoutAllBtn = document.getElementById("checkoutAllBtn");
+
+    if (checkoutAllBtn) {
+        checkoutAllBtn.addEventListener("click", checkoutAllBooks);
+    }
+
+    const clearCheckoutBtn = document.getElementById("clearCheckoutBtn");
+
+    if (clearCheckoutBtn) {
+        clearCheckoutBtn.addEventListener("click", clearCheckoutList);
+    }
+
+    displayCheckoutList();
 });
