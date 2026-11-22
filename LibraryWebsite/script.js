@@ -384,6 +384,7 @@ async function checkoutBook(bookID) {
 
 // Connects the Check Out button to the selected book
 
+
 function setupCheckoutButton() {
 
     const checkoutBtn = document.getElementById("checkoutBtn");
@@ -393,9 +394,9 @@ function setupCheckoutButton() {
     }
 
     const params = new URLSearchParams(window.location.search);
-    const bookID = params.get("id");
+    const bookID = Number(params.get("id"));
 
-    if (!bookID || !/^[1-9]\d*$/.test(bookID)) {
+    if (!Number.isInteger(bookID) || bookID < 1) {
         checkoutBtn.disabled = true;
         return;
     }
@@ -406,13 +407,12 @@ function setupCheckoutButton() {
             sessionStorage.getItem("checkoutList") || "[]"
         );
 
-        // Prevent adding the same book twice
-        if (checkoutList.includes(Number(bookID))) {
+        if (checkoutList.includes(bookID)) {
             alert("This book is already in your checkout list.");
             return;
         }
 
-        checkoutList.push(Number(bookID));
+        checkoutList.push(bookID);
 
         sessionStorage.setItem(
             "checkoutList",
@@ -422,6 +422,7 @@ function setupCheckoutButton() {
         alert("Book added to checkout list!");
     });
 }
+
 
 async function checkoutAllBooks() {
 
