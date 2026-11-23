@@ -43,16 +43,13 @@ if (!is_array($data)) {
 $firstName = trim($data["first_name"] ?? "");
 $lastName = trim($data["last_name"] ?? "");
 $address = trim($data["address"] ?? "");
-$email = trim($data["email"] ?? "");
+
 
 if ($firstName === "" || $lastName === "" ||
-    $address === "" || $email === "") {
+    $address === "") {
     sendResponse(400, false, "All fields are required.");
 }
 
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    sendResponse(400, false, "Invalid email address.");
-}
 
 $userID = (int) $_SESSION["user_id"];
 
@@ -61,7 +58,6 @@ $stmt = $conn->prepare(
      SET first_name = ?,
          last_name = ?,
          address = ?,
-         email = ?
      WHERE id = ?"
 );
 
@@ -70,7 +66,6 @@ $stmt->bind_param(
     $firstName,
     $lastName,
     $address,
-    $email,
     $userID
 );
 

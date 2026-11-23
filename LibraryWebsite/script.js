@@ -550,7 +550,7 @@ async function getProfile() {
         document.getElementById("firstName").value = user.first_name;
         document.getElementById("lastName").value = user.last_name;
         document.getElementById("address").value = user.address;
-        document.getElementById("email").value = user.email;
+        
 
     } catch (error) {
         console.error(error);
@@ -567,8 +567,8 @@ async function updateProfile(event) {
     const user = {
         first_name: document.getElementById("firstName").value,
         last_name: document.getElementById("lastName").value,
-        address: document.getElementById("address").value,
-        email: document.getElementById("email").value
+        address: document.getElementById("address").value
+        
     };
 
     try {
