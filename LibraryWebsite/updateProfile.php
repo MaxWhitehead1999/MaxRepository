@@ -50,34 +50,38 @@ if ($firstName === "" || $lastName === "" ||
 }
 
 
+
 $userID = (int) $_SESSION["user_id"];
 
-$stmt = $conn->prepare(
-    "UPDATE accounts
-     SET first_name = ?,
-         last_name = ?,
-         address = ?,
-     WHERE id = ?"
-);
-
-$stmt->bind_param(
-    "ssssi",
-    $firstName,
-    $lastName,
-    $address,
-    $userID
-);
-
 try {
+
+    $stmt = $conn->prepare(
+        "UPDATE accounts
+         SET first_name = ?,
+             last_name = ?,
+             address = ?
+         WHERE id = ?"
+    );
+
+    $stmt->bind_param(
+        "sssi",
+        $firstName,
+        $lastName,
+        $address,
+        $userID
+    );
+
     $stmt->execute();
+
     sendResponse(200, true, "Profile updated successfully!");
-} catch (mysqli_sql_exception $error) {
-    if ($error->getCode() == 1062) {
-        sendResponse(409, false, "Email address is already in use.");
-    }
+
+} catch (Throwable $error) {
 
     error_log($error->getMessage());
+
     sendResponse(500, false, "Unable to update profile.");
 }
 
+
 ?>
+
