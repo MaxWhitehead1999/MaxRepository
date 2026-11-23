@@ -535,6 +535,61 @@ function clearCheckoutList() {
     alert("Checkout list cleared!");
 }
 
+// Retrieves the user's profile information from the server and populates the profile form fields in the editProfile.html page. If an error occurs during the fetch operation, it logs the error to the console and displays an alert to the user.
+async function getProfile() {
+
+    try {
+        const response = await fetch("getProfile.php");
+
+        if (!response.ok) {
+            throw new Error("Unable to retrieve profile.");
+        }
+
+        const user = await response.json();
+
+        document.getElementById("firstName").value = user.first_name;
+        document.getElementById("lastName").value = user.last_name;
+        document.getElementById("address").value = user.address;
+        document.getElementById("email").value = user.email;
+
+    } catch (error) {
+        console.error(error);
+        alert("Unable to load profile information.");
+    }
+}
+
+
+// Updates users proile info from the editprofile page and sends the updated information to the server for processing. It prevents the default form submission behavior, constructs a user object with the updated profile information, and sends it to "updateProfile.php" using a POST request. If the update is successful, it displays a success message; otherwise, it logs the error and alerts the user of the failure.
+async function updateProfile(event) {
+
+    event.preventDefault();
+
+    const user = {
+        first_name: document.getElementById("firstName").value,
+        last_name: document.getElementById("lastName").value,
+        address: document.getElementById("address").value,
+        email: document.getElementById("email").value
+    };
+
+    try {
+        const response = await fetch("updateProfile.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(user)
+        });
+
+        const result = await response.json();
+
+        alert(result.message);
+
+    } catch (error) {
+        console.error(error);
+        alert("Unable to update profile.");
+    }
+}
+
 
 
 // adds event listeners for sort dropdown, search input, and filter dropdown for search page
@@ -568,4 +623,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     displayCheckoutList();
+
+    // Only run on editProfile.html
+    const editProfileForm = document.getElementById("editProfileForm");
+
+    if (editProfileForm) {
+        getProfile();
+        editProfileForm.addEventListener("submit", updateProfile);
+    }
 });
