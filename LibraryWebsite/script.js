@@ -550,7 +550,6 @@ async function getProfile() {
         document.getElementById("firstName").value = user.first_name;
         document.getElementById("lastName").value = user.last_name;
         document.getElementById("address").value = user.address;
-        
 
     } catch (error) {
         console.error(error);
@@ -568,7 +567,6 @@ async function updateProfile(event) {
         first_name: document.getElementById("firstName").value,
         last_name: document.getElementById("lastName").value,
         address: document.getElementById("address").value
-        
     };
 
     try {
@@ -582,7 +580,12 @@ async function updateProfile(event) {
 
         const result = await response.json();
 
-        alert(result.message);
+        if (result.success) {
+            alert("Profile updated successfully!");
+            window.location.href = "profile.html";
+        } else {
+            alert("Update Failed: " + result.message);
+        }
 
     } catch (error) {
         console.error(error);

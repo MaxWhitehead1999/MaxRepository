@@ -1,6 +1,5 @@
 
 <?php
-
 session_start();
 require "database.php";
 
@@ -12,7 +11,7 @@ if (!isset($_SESSION["user_id"])) {
     exit();
 }
 
-$userID = $_SESSION["user_id"];
+$userID = (int) $_SESSION["user_id"];
 
 $stmt = $conn->prepare(
     "SELECT first_name, last_name, address, email
@@ -33,5 +32,3 @@ if (!$user) {
 }
 
 echo json_encode($user);
-
-?>
