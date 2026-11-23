@@ -13,7 +13,7 @@ if (!isset($_SESSION["user_id"])) {
 $userID = (int) $_SESSION["user_id"];
 
 $stmt = $conn->prepare(
-    "SELECT first_name, last_name, address, email
+    "SELECT id, first_name, last_name, address, email
      FROM accounts
      WHERE id = ?"
 );

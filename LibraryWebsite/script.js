@@ -202,6 +202,11 @@ function getAccount() {
                     account.email;
             }
 
+            if (document.getElementById("cardNumber")) {
+                document.getElementById("cardNumber").textContent =
+                    "00" + account.user_id;
+            }
+
             if (document.getElementById("address")) {
                 document.getElementById("address").textContent =
                     account.address;
@@ -568,6 +573,8 @@ async function updateProfile(event) {
         last_name: document.getElementById("lastName").value,
         address: document.getElementById("address").value
     };
+
+
 
     try {
         const response = await fetch("updateProfile.php", {
