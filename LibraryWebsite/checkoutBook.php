@@ -2,6 +2,7 @@
 
 session_start();
 require "database.php";
+require_once "updateLateFees.php";
 
 header("Content-Type: application/json");
 
@@ -52,10 +53,14 @@ if (!$bookID || $bookID < 1) {
 
 $userID = (int) $_SESSION["user_id"];
 
+updateLateFees($conn, $userID);
+
 // Start a database transaction
 $conn->begin_transaction();
 
 try {
+
+    
 
     // Lock the book row while checking availability
     $stmt = $conn->prepare(

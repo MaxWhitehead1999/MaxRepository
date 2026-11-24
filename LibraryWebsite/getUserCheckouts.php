@@ -2,6 +2,7 @@
 
 session_start();
 require "database.php";
+require_once "updateLateFees.php";
 
 header("Content-Type: application/json");
 
@@ -12,6 +13,9 @@ if (!isset($_SESSION["user_id"])) {
 }
 
 $userID = $_SESSION["user_id"];
+
+//Updates Users checkouts to reflect any late fees that have accrued since the last time they checked out a book
+updateLateFees($conn, $userID);
 
 $sql = "SELECT books.id, books.title, checkouts.status
         FROM checkouts
