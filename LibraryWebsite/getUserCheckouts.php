@@ -22,6 +22,9 @@ $sql = "SELECT books.id, books.title, checkouts.status
         JOIN books ON checkouts.book_id = books.id
         WHERE checkouts.user_id = ?
         AND checkouts.status IN ('reserved', 'checked_out')
+        AND checkouts.return_date IS NULL
+        AND (checkouts.due_date IS NULL
+             OR checkouts.due_date >= NOW())
         ORDER BY checkouts.id DESC";
 
 $stmt = $conn->prepare($sql);
