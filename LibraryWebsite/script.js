@@ -600,6 +600,61 @@ async function updateProfile(event) {
     }
 }
 
+// retrieves the list of overdue books from the server and displays them in the
+// "overdueBooks" container on the main.html and userBooks.html pages. 
+async function getOverdueBooks() {
+
+    const container = document.getElementById("overdueBooks");
+
+    if (!container) {
+        return;
+    }
+
+    try {
+
+        const response = await fetch("getOverdueBooks.php");
+
+        if (!response.ok) {
+            throw new Error("Unable to retrieve overdue books.");
+        }
+
+        const books = await response.json();
+
+        container.innerHTML = "";
+
+        if (books.length === 0) {
+            container.textContent = "No overdue books.";
+            return;
+        }
+
+        books.forEach(book => {
+
+            const paragraph = document.createElement("p");
+
+            const link = document.createElement("a");
+
+            link.href = "bookresult.html?id=" + book.id;
+            link.textContent = book.title;
+
+            const fee = document.createElement("span");
+
+            fee.textContent = " - $" + Number(book.late_fee).toFixed(2);
+            fee.style.color = "red";
+
+            paragraph.appendChild(link);
+            paragraph.appendChild(fee);
+
+            container.appendChild(paragraph);
+        });
+
+    } catch (error) {
+
+        console.error(error);
+        container.textContent = "Unable to load overdue books.";
+    }
+}
+
+
 
 
 // adds event listeners for sort dropdown, search input, and filter dropdown for search page
@@ -641,4 +696,8 @@ document.addEventListener('DOMContentLoaded', () => {
         getProfile();
         editProfileForm.addEventListener("submit", updateProfile);
     }
+
+    // Only run on main.html and userBooks.html
+    getUserCheckouts();
+    getOverdueBooks();
 });
