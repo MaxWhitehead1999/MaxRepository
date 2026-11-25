@@ -237,6 +237,8 @@ async function fetchBooks() {
     const response = await fetch('getBooks.php');
     const books = await response.json();
 
+    console.log("Books received:", books);
+
     // Selection Options for search page includes the filter dropdown, sort dropdown, and search bar
     const filterSelect = document.getElementById('filterSelect').value;
     const sortSelect = document.getElementById('sort').value;

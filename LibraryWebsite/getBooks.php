@@ -59,5 +59,3 @@ echo json_encode($books);
 $conn->close();
 
 ?>
-
-?>

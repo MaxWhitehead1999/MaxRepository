@@ -22,7 +22,7 @@ User ID: 145, Book ID: 74
 Searches for specific Book title using API
 
 ----------- API Testing 2 -----------
-User ID: 145, Book status: (overdue)
+User ID: 1, Book status: (overdue)
 User Attempts checkout with overdue book
 
 ----------- API TESTING 3 -----------
@@ -61,3 +61,15 @@ Javascript, Laravel, React)
 • Must include security and accessibility functionality
 ✓ Must be deployed
 
+
+INSERT INTO checkouts
+(user_id, book_id, checkout_date, due_date, status, late_fee, late_fee_paid)
+VALUES (
+    1,
+    50,
+    DATE_SUB(NOW(), INTERVAL 34 DAY),
+    DATE_SUB(NOW(), INTERVAL 27 DAY),
+    'checked_out',
+    0.00,
+    0.00
+);

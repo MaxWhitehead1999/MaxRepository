@@ -35,9 +35,9 @@ test phonenumber: 1234567890
 
 test BADpassword: Pass1
 
-ALT email: chantel@icloud.com
+ALT email: Bailey@icloud.com
 
-ALT pass: Bailey123
+ALT pass: Bailey$321
 
 render: https://library-website-s266.onrender.com
 
