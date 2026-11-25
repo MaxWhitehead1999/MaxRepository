@@ -16,8 +16,31 @@ if ($id !== "") {
 
     $result = $stmt->get_result();
 } else {
-    $sql = "SELECT * FROM books";
-    $result = $conn->query($sql);
+    if (isset($_GET["id"])) {
+
+    $bookID = filter_var($_GET["id"], FILTER_VALIDATE_INT);
+
+    if ($bookID === false || $bookID < 1) {
+        http_response_code(400);
+        echo json_encode(["error" => "Invalid book ID"]);
+        exit();
+    }
+
+    $stmt = $conn->prepare(
+        "SELECT * FROM books WHERE id = ?"
+    );
+
+    $stmt->bind_param("i", $bookID);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+
+    } else {
+
+        $sql = "SELECT * FROM books";
+        $result = $conn->query($sql);
+
+    }
 }
 
 
@@ -34,5 +57,7 @@ header('Content-Type: application/json');
 echo json_encode($books);
 
 $conn->close();
+
+?>
 
 ?>
