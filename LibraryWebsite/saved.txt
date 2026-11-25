@@ -35,11 +35,17 @@ test phonenumber: 1234567890
 
 test BADpassword: Pass1
 
+ALT email: chantel@icloud.com
+
+ALT pass: Bailey123
+
 render: https://library-website-s266.onrender.com
 
 render link: https://library-website-s266.onrender.com/login.html
 
 http://localhost/CapstoneProject/LibraryWebsite/bookresult.html?id=1
+
+USE mylibrary; 
 
 !!!!!!!!How to recover if database files are corrupted:!!!!!!!!
 

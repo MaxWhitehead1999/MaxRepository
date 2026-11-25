@@ -655,6 +655,67 @@ async function getOverdueBooks() {
 }
 
 
+// function retrieves both the lost of checked out books and overdue books for the admin page
+// and displays them in adminChekouts container.
+async function getAdminCheckouts() {
+
+    const container = document.getElementById("adminCheckouts");
+
+    if (!container) {
+        return;
+    }
+
+    try {
+
+        const response = await fetch("getAdminCheckouts.php");
+
+        if (!response.ok) {
+            throw new Error("Unable to retrieve checkouts.");
+        }
+
+        const checkouts = await response.json();
+
+        container.innerHTML = "";
+
+        checkouts.forEach(checkout => {
+
+            const row = document.createElement("tr");
+
+            const values = [
+                "00" + checkout.user_id,
+                checkout.first_name + " " + checkout.last_name,
+                checkout.title,
+                checkout.status,
+                "$" + Number(checkout.late_fee).toFixed(2)
+            ];
+
+            values.forEach(value => {
+                const cell = document.createElement("td");
+                cell.textContent = value;
+                row.appendChild(cell);
+            });
+
+            const actionCell = document.createElement("td");
+
+            const removeBtn = document.createElement("button");
+
+            removeBtn.textContent = "Remove";
+            removeBtn.disabled = true;
+
+            actionCell.appendChild(removeBtn);
+            row.appendChild(actionCell);
+
+            container.appendChild(row);
+        });
+
+    } catch (error) {
+        console.error(error);
+        alert("Unable to load checkout records.");
+    }
+}
+
+
+
 
 
 // adds event listeners for sort dropdown, search input, and filter dropdown for search page
@@ -697,7 +758,8 @@ document.addEventListener('DOMContentLoaded', () => {
         editProfileForm.addEventListener("submit", updateProfile);
     }
 
-    // Only run on main.html and userBooks.html
+    //functions for checkouts, overdue books, and general liibrary checkouts for the admin page
     getUserCheckouts();
     getOverdueBooks();
+    getAdminCheckouts();
 });
