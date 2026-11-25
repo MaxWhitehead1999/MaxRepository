@@ -700,7 +700,9 @@ async function getAdminCheckouts() {
             const removeBtn = document.createElement("button");
 
             removeBtn.textContent = "Remove";
-            removeBtn.disabled = true;
+            removeBtn.addEventListener("click", function () {
+                returnBook(checkout.checkout_id);
+            });
 
             actionCell.appendChild(removeBtn);
             row.appendChild(actionCell);
@@ -713,6 +715,42 @@ async function getAdminCheckouts() {
         alert("Unable to load checkout records.");
     }
 }
+
+
+// sends a request to the server to return a checked out book based on the checkout ID.
+async function returnBook(checkoutID) {
+
+    if (!confirm("Are you sure you want to remove this book?")) {
+        return;
+    }
+
+    try {
+
+        const response = await fetch("returnBook.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                checkout_id: checkoutID
+            })
+        });
+
+        const result = await response.json();
+
+        alert(result.message);
+
+        if (response.ok && result.success) {
+            await getAdminCheckouts();
+        }
+
+    } catch (error) {
+
+        console.error(error);
+        alert("Unable to remove book.");
+    }
+}
+
 
 
 
