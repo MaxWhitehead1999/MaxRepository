@@ -27,11 +27,29 @@ $sql = "SELECT books.id, books.title,
         WHERE checkouts.user_id = ?
         AND checkouts.status = 'checked_out'
         AND checkouts.return_date IS NULL
-        AND checkouts.due_date < NOW()
-        ORDER BY checkouts.due_date ASC";
+
+        AND checkouts.due_date < NOW()";
+
+        $daysOverdue = filter_input(
+            INPUT_GET,
+            "days_overdue",
+            FILTER_VALIDATE_INT
+        );
+
+        if ($daysOverdue !== null && $daysOverdue !== false) {
+            $sql .= " AND TIMESTAMPDIFF(DAY, checkouts.due_date, NOW()) = ?";
+        }
+
+        $sql .= " ORDER BY checkouts.due_date ASC";
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $userID);
+
+if ($daysOverdue !== null && $daysOverdue !== false) {
+    $stmt->bind_param("ii", $userID, $daysOverdue);
+} else {
+    $stmt->bind_param("i", $userID);
+}
+
 $stmt->execute();
 
 $result = $stmt->get_result();
@@ -43,3 +61,4 @@ while ($row = $result->fetch_assoc()) {
 }
 
 echo json_encode($books);
+
