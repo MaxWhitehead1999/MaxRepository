@@ -349,14 +349,47 @@ input{
    
 }
 
-
-
 #searchInput {
     width: 300px;
     padding: 8px;
 }
 
+/** Admin Page Styles **/
 
+.adminContainer{
+    width: 80%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 5%;
+    padding: 20px;
+    border: 2px solid black;
+}
 
+.adminContainer h1 {
+    text-align: center;
+}
+
+.adminTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.adminTable th,
+.adminTable td {
+    border: 1px solid black;
+    padding: 15px;
+    text-align: center;
+}
+
+.adminTable th {
+    background-color: black;
+    color: white;
+}
+
+.adminTable button {
+    padding: 8px 15px;
+    cursor: pointer;
+}
 
 

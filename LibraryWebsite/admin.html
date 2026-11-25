@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Administrator Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav class="menuRibbon">
+        <ul>
+            <li><a href="main.html">Home</a></li>
+            <li><a href="search.html">SearchBook</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="login.html">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="adminContainer">
+
+        <h1>Manage Checked Out Books</h1>
+
+        <table class="adminTable">
+            <thead>
+                <tr>
+                    <th>Card Number</th>
+                    <th>Account Name</th>
+                    <th>Book Title</th>
+                    <th>Status</th>
+                    <th>Late Fee</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody id="adminCheckouts">
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
