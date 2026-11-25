@@ -3,8 +3,11 @@
 session_start();
 
 // Restrict this endpoint to local testing for now
-if (!in_array($_SERVER["REMOTE_ADDR"] ?? "", ["127.0.0.1", "::1"], true)) {
+if (!isset($_SESSION["user_id"]) ||
+    (int) $_SESSION["user_id"] !== 1) {
+
     http_response_code(403);
+    echo json_encode(["error" => "Access denied."]);
     exit();
 }
 
