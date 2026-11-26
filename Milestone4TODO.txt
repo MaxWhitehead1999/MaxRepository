@@ -1,0 +1,73 @@
+******************************************************************
+
+                !!!MUST DO BEFORE DECEMBER 11TH 11:59PM!!!
+
+>Implement Librarian and Admin roles for certain accounts
+
+    >Includes adding a add book,remove book, and update book features for CRUD
+
+>Implement remaining Security and accessibility Testing
+
+NFR 1, NFR2, NFR3, NFR4, NFR4.2
+
+
+
+ZAP:
+----------- Security Testing 1 -----------
+Verify Password Hashings
+expected output: password stored as hash values
+
+----------- Security Testing 2 -----------
+Attempt to inject JavaScript into input fields
+example input: <script>alert(‘XSS’)</script>
+Script is sanitized and not executed and run
+
+----------- Security Testing 3 -----------
+Attempt to inject SQL commands in login field
+example input: Email: ‘ OR ‘1’=’1, Password: 1134
+Input is rejected and login fails without database exposure
+
+
+
+axe DevTools:
+
+----------- accessibility Testing 1 -----------
+Check text readability
+Increase browser zoom
+Text remains readable
+
+----------- accessibility Testing 2 -----------
+Test text spacing adjustments
+Increase spacing settings
+Page contents remain usable and easy to read
+
+
+> make a final Report by December 11th at 11:59pm
+
+> make 10 minute video going over remaining tests and features
+
+Remaining Requirements: 
+
+• Must include user accounts with at least two roles
+• Must perform CRUD actions to data – Create, Read, Update, Delete  (librarian role)
+• Must include security and accessibility functionality
+
+
+Basically in summary:
+
+-> create Librarian and admin roles to go along-side user accounts
+   -> move admin.html to the admin role only
+-> add in addbook/editbook/deletebook feature for librarian role only
+-> finish Security and Accessibility Testing
+-> wright report on CapstoneProject
+-> record video disgussing final updates (save for last)
+
+*****************************************************************
+OPTIONAL:
+
+>add delete account page/function for admin role
+>lock out user for 30 minutes upon too many attempts
+>allow user to change profile picture in profile menu
+>add timer to dates for checkout/overdue system
+>allow user to change their password by sending them an email
+
